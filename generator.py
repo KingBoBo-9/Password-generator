@@ -6,10 +6,7 @@ special_chars = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 numbers = "1234567890"
 list_of_actions = [letters_lower, letters_upper, numbers, special_chars]
 
-# print(letters_lower[random.randint(0, len(letters_lower)-1)])
-
-
-def generate(length):
+def generate_password(length):
     password = ""
 
     i = 0
@@ -18,7 +15,14 @@ def generate(length):
         list_choice_choice = random.choice(list_choice)
         password += list_choice_choice
         i += 1
+    
+    if check_password(password):
+        return password
+    
 
+    
+
+def check_password(password: str):
     has_lower = False
     has_upper = False
     has_special = False
@@ -40,16 +44,18 @@ def generate(length):
         and has_special == True
         and has_number == True
     ):
-        print("Password meets requirements!")
-        return password
+        return True
     else:
         print("Password does not meet requirements!")
+        return False
 
 
-x = generate(3)
-y = generate(9)
-z = generate(27)
+x = generate_password(3)
+y = generate_password(9)
+z = generate_password(27)
 
 print(f"password x = {x}")
-print(f"password y = {y}")
+print("")
+print(f"Password y = {y}")
+print("")
 print(f"password z = {z}")

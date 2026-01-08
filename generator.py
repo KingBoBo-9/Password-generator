@@ -6,19 +6,20 @@ SPECIAL_CHARS = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 NUMBERS = "1234567890"
 LIST_OF_ACTIONS = [LETTERS_LOWER, LETTERS_UPPER, NUMBERS, SPECIAL_CHARS]
 
-def generate_password(length):
-    password = ""
 
-    
-    for i in range(length):
-        list_choice = random.choice(LIST_OF_ACTIONS)
-        list_choice_choice = random.choice(list_choice)
-        password += list_choice_choice
-        
-    
-    if check_password(password):
-        return password
-    
+def generate_password(length):
+    while True:
+        password = ""
+
+        for i in range(length):
+            list_choice = random.choice(LIST_OF_ACTIONS)
+            list_choice_choice = random.choice(list_choice)
+            password += list_choice_choice
+
+        if check_password(password):
+            return password
+
+
 def check_password(password: str):
     has_lower = False
     has_upper = False
@@ -38,18 +39,17 @@ def check_password(password: str):
     if has_lower and has_upper and has_special and has_number:
         return True
     else:
-        print("Password does not meet requirements!")
         return False
+
 
 def main():
     password_length = int(input("Please specify length of password: "))
-    generated_password = generate_password(password_length)
-    print(f"The generated password was: {generate_password}")
-    
+    if password_length < 4:
+        print("Password must be at least 4 characters long.")
+    else:
+        generated_password = generate_password(password_length)
+        print(f"The generated password was: {generated_password}")
 
 
 if __name__ == "__main__":
     main()
-
-
-
